@@ -53,4 +53,9 @@ mesh4.position.set(5, 0, 3);
 scene.add(mesh1, mesh2, mesh3, mesh4);
 
 
+//ライトを追加
+const directionalLight = new THREE.DirectionalLight("#fff", 4);
+directionalLight.position.set(0.5, 1, 0);
+scene.add(directionalLight);
+
 renderer.render(scene, camera);
