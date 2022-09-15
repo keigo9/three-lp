@@ -1,5 +1,10 @@
 import './style.css'
 import * as THREE from 'three';
+import * as dat from 'lil-gui';
+
+//ui debagu
+const gui = new dat.GUI();
+
 
 const canvas = document.querySelector(".webgl");
 
@@ -36,7 +41,11 @@ const material = new THREE.MeshPhysicalMaterial({
   metalness: 0.86,
   roughness: 0.37,
   flatShading: true,
-})
+});
+
+gui.addColor(material, "color");
+gui.add(material, "metalness").min(0).max(1).step(0.01);
+gui.add(material, "roughness").min(0).max(1).step(0.01);
 
 // ジオメトリ作成　mesh
 const mesh1 = new THREE.Mesh(new THREE.TorusGeometry(1, 0.4, 16, 60), material);
