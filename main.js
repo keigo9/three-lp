@@ -62,6 +62,28 @@ mesh4.position.set(5, 0, 3);
 scene.add(mesh1, mesh2, mesh3, mesh4);
 const meshes = [mesh1, mesh2, mesh3, mesh4];
 
+// particles
+const particlesGeometry = new THREE.BufferGeometry();
+const particlesCount = 3000;
+
+const positionArray = new Float32Array(particlesCount * 3);
+
+for (let i = 0; i < particlesCount * 3; i++) {
+  positionArray[i] = (Math.random() - 0.5) * 10;
+}
+//console.log(positionArray)
+
+particlesGeometry.setAttribute(
+  "position",
+  new THREE.BufferAttribute(positionArray, 3)
+);
+
+const particlesMaterial = new THREE.PointsMaterial({
+  size: 0.025,
+  color: "#fff"
+})
+const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+scene.add(particles);
 
 //ライトを追加
 const directionalLight = new THREE.DirectionalLight("#fff", 4);
@@ -135,8 +157,8 @@ const animete = () => {
   }
 
   //カメラ制御
-  camera.position.x += cursor.x * getDeltaTime * 2;
-  camera.position.y += -cursor.y * getDeltaTime * 2;
+  camera.position.x += cursor.x * getDeltaTime * 1;
+  camera.position.y += -cursor.y * getDeltaTime * 1;
 
   window.requestAnimationFrame(animete);
 }
