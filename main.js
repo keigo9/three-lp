@@ -110,6 +110,18 @@ function rotate() {
 }
 rotate();
 
+const cursor = {};
+cursor.x = 0;
+cursor.y = 0;
+//console.log(cursor);
+
+window.addEventListener('mousemove', (event) => {
+  //console.log(event);
+  cursor.x = event.clientX / size.width - 0.5;
+  cursor.y = event.clientY / size.height - 0.5;
+  //console.log(cursor);
+})
+
 const animete = () => {
   renderer.render(scene, camera);
 
@@ -121,6 +133,10 @@ const animete = () => {
     mesh.rotation.x += 0.1 * getDeltaTime;
     mesh.rotation.y += 0.1 * getDeltaTime;
   }
+
+  //カメラ制御
+  camera.position.x += cursor.x * getDeltaTime * 2;
+  camera.position.y += -cursor.y * getDeltaTime * 2;
 
   window.requestAnimationFrame(animete);
 }
