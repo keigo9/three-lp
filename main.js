@@ -88,13 +88,24 @@ let speed = 0;
 let rotation = 0;
 window.addEventListener('wheel', (event) => {
   speed += event.deltaY * 0.0002;
-  console.log(speed);
+  //console.log(speed);
 })
 
 function rotate() {
   rotation += speed;
   speed *= 0.93;
-  mesh1.position.x = rotation;
+
+  //geomeotry rotate
+  // 原点の座標(2, -3), 半径3.8 位相のずれθ+PI
+  mesh1.position.x = 2 + 3.8 * Math.cos(rotation);
+  mesh1.position.z = -3 + 3.8 * Math.sin(rotation);
+  mesh2.position.x = 2 + 3.8 * Math.cos(rotation + Math.PI / 2);
+  mesh2.position.z = -3 + 3.8 * Math.sin(rotation + Math.PI / 2);
+  mesh3.position.x = 2 + 3.8 * Math.cos(rotation + Math.PI);
+  mesh3.position.z = -3 + 3.8 * Math.sin(rotation + Math.PI);
+  mesh4.position.x = 2 + 3.8 * Math.cos(rotation + 3 + (Math.PI / 2));
+  mesh4.position.z = -3 + 3.8 * Math.sin(rotation + 3 + (Math.PI / 2));
+
   window.requestAnimationFrame(rotate);
 }
 rotate();
