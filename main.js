@@ -58,4 +58,21 @@ const directionalLight = new THREE.DirectionalLight("#fff", 4);
 directionalLight.position.set(0.5, 1, 0);
 scene.add(directionalLight);
 
-renderer.render(scene, camera);
+//ブラウザリサイズ操作
+window.addEventListener('resize', () => {
+  size.width = window.innerWidth;
+  size.height = window.innerHeight;
+
+  camera.aspect = size.width / size.height;
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(size.width, size.height);
+  renderer.setPixelRatio(window.devicePixelRatio);
+})
+
+const animete = () => {
+  renderer.render(scene, camera);
+  window.requestAnimationFrame(animete);
+}
+
+animete();
