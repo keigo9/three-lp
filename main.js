@@ -83,6 +83,21 @@ window.addEventListener('resize', () => {
 
 const clock = new THREE.Clock();
 
+//ホイール
+let speed = 0;
+let rotation = 0;
+window.addEventListener('wheel', (event) => {
+  speed += event.deltaY * 0.0002;
+  console.log(speed);
+})
+
+function rotate() {
+  rotation += speed;
+  speed *= 0.93;
+  mesh1.position.x = rotation;
+  window.requestAnimationFrame(rotate);
+}
+rotate();
 
 const animete = () => {
   renderer.render(scene, camera);
